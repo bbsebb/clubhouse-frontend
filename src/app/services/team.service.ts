@@ -11,10 +11,10 @@ export class TeamService {
 
   constructor(private http: HttpClient) { }
 
-  getTeams(caterogyName?:string,gender?:Gender):Observable<Team[]> {
+  getTeams(categoryName?:string,gender?:Gender):Observable<Team[]> {
     let url:string = 'http://localhost:8080/api/teams';
-    if((gender) && (caterogyName)) {
-      url = `http://localhost:8080/api/teams?category=${caterogyName}&gender=${gender}`;
+    if((gender) && (categoryName)) {
+      url = `http://localhost:8080/api/teams?category=${categoryName}&gender=${gender}`;
     }
     return this.http.get<Team[]>(url);
   }

@@ -15,6 +15,8 @@ import {CategoryService} from "../../../services/category.service";
 import {Halle} from "../../../models/games/Halle";
 import {HalleService} from "../../../services/halle.service";
 import {map} from "rxjs/operators";
+import {Club} from "../../../models/games/Club";
+import {ClubService} from "../../../services/club.service";
 
 @Component({
   selector: 'app-create-game',
@@ -35,14 +37,13 @@ export class CreateGameComponent implements OnInit {
   homeTeamControl!: FormControl;
   visitingTeamControl!: FormControl;
 
-  teams$!: Observable<Team[]>;
+  club$!: Observable<Club[]>;
   categories$!: Observable<Category[]>
   halle$!: Observable<Halle[]>;
 
-  teamControlEnable$!: Observable<boolean>;
 
   constructor(private formBuilder: FormBuilder,
-              private teamService: TeamService,
+              private clubService: ClubService,
               private categoryService: CategoryService,
               private halleService: HalleService) {
   }
@@ -54,35 +55,21 @@ export class CreateGameComponent implements OnInit {
 
     this.genderControl = this.formBuilder.control('');
     this.categoryControl = this.formBuilder.control('');
-    this.homeTeamControl = this.formBuilder.control({value: '', disabled: true});
-    this.visitingTeamControl = this.formBuilder.control({value: '', disabled: true});
+    this.homeTeamControl = this.formBuilder.control('');
+    this.visitingTeamControl = this.formBuilder.control('');
     this.halleControl = this.formBuilder.control('');
     this.dateTimeControl = this.formBuilder.control('');
 
 
 
 
-    combineLatest([
-      this.genderControl.valueChanges,
-      this.categoryControl.valueChanges
-    ]).pipe(
-      map(([gender, category]) => !!category && !!gender)
-    ).subscribe(
-      teamControlEnable => {
-      if (teamControlEnable) {
-        this.homeTeamControl.enable();
-        this.visitingTeamControl.enable();
-      } else {
-        this.homeTeamControl.disable();
-        this.visitingTeamControl.disable();
-      }
-    });
 
-    this.teams$ = this.teamService.getTeams();
+
+    this.club$ = this.clubService.getClubs();
 
     this.halle$ = this.homeTeamControl.valueChanges.pipe(
-      switchMap(teamId => this.teamService.getTeam(teamId)),
-      switchMap(team => this.halleService.getHalles(team.club.code))
+      switchMap(clubCode => this.clubService.getClub(clubCode)),
+      switchMap(club => this.halleService.getHalles(club.code))
     )
 
     this.formGame = this.formBuilder.group({})

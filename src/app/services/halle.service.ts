@@ -15,6 +15,7 @@ export class HalleService {
     if(clubCode) {
       url = 'http://localhost:8080/api/halles?club_code='+clubCode;
     }
+    console.log(url);
     return this.http.get<Halle[]>(url);
   }
 }
