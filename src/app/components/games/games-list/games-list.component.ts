@@ -41,7 +41,6 @@ export class GamesListComponent implements OnInit,AfterViewInit{
 
   ngAfterViewInit(): void {
     this.gameService.getGames().subscribe(games => {
-      console.log(games);
       this.dataSource.data = games;
       this.dataSource.paginator = this.paginator;
     });

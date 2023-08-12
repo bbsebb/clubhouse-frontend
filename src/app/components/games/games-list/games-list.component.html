@@ -47,7 +47,11 @@
 
   <!-- view game Column -->
   <ng-container matColumnDef="view">
-    <th mat-header-cell *matHeaderCellDef>  </th>
+    <th mat-header-cell *matHeaderCellDef>
+      <button routerLink="/games/import" mat-icon-button aria-label="button to import games">
+        <mat-icon>system_update_alt</mat-icon>
+      </button>
+    </th>
     <td mat-cell *matCellDef="let game">
       <button routerLink="/games/{{game.code}}" mat-icon-button aria-label="button to viewing game">
         <mat-icon>arrow_right</mat-icon>

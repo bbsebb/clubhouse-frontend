@@ -1,0 +1,19 @@
+<mat-card class="main-form" >
+  <form [formGroup]="formImportFile" (ngSubmit)="onSubmit()">
+    <!--Import files-->
+      <mat-card-subtitle>Importer des données dans le base de données</mat-card-subtitle>
+      <div class="form-row">
+        <mat-form-field appearance="fill">
+          <mat-label>Fichier</mat-label>
+          <ngx-mat-file-input [formControl]="fileControle" [multiple]="true" [accept]="'.csv'">
+
+          </ngx-mat-file-input>
+          <mat-error>Ce champ est requis</mat-error>
+        </mat-form-field>
+        <mat-card-actions >
+          <button mat-flat-button color="primary" type="submit" >IMPORTER</button>
+        </mat-card-actions>
+      </div>
+  </form>
+</mat-card>
+
