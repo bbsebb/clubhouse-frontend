@@ -1,41 +1,4 @@
-mat-form-field {
-  width: 45%;
-  &.full-width {
-    width: 80%;
-    margin-left: 10%;
-  }
-}
-
-mat-card-subtitle {
-  margin: 5px 10px 10px;
-}
-
-.form-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.form-card {
-  margin: 20px 0;
-  padding: 0px 20px;
-}
-
-.mat-radio-button ~ .mat-radio-button {
-  margin-left: 16px;
-}
-
-mat-card-actions {
-  display: flex;
-  justify-content: center;
-}
-
-.main-form {
-  position: relative;
-  margin: 20px;
-
-  padding: 20px;
-}
+@import "src/app/form";
 
 :host .mdc-text-field__input::-webkit-calendar-picker-indicator {
   display: block;

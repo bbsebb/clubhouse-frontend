@@ -1,6 +1,6 @@
 import {Pipe, PipeTransform} from '@angular/core';
-import {Category} from "../models/games/Category";
-import {Gender} from "../models/games/Gender";
+import {Category} from "../../models/games/Category";
+import {Gender} from "../../models/games/Gender";
 
 @Pipe({
   name: 'nameTeam',

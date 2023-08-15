@@ -4,7 +4,7 @@ import {GameService} from "../../../services/game.service";
 import {Game} from "../../../models/games/Game";
 import {MatTableDataSource, MatTableModule} from "@angular/material/table";
 import {MatPaginator, MatPaginatorModule} from "@angular/material/paginator";
-import {NameTeamPipe} from "../../../pipes/name-team.pipe";
+import {NameTeamPipe} from "../../../utils/pipes/name-team.pipe";
 import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
 import {RouterLink} from "@angular/router";

@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {Halle} from "../models/games/Halle";
-import { v4 as uuidv4 } from 'uuid';
+
 import {map} from "rxjs/operators";
 
 @Injectable({
