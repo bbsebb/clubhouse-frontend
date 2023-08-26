@@ -9,13 +9,13 @@ import {MatSelectModule} from "@angular/material/select";
 import {Observable, switchMap} from "rxjs";
 import {Gender} from "../../../models/games/Gender";
 import {Category} from "../../../models/games/Category";
-import {CategoryService} from "../../../services/category.service";
-import {Halle} from "../../../models/games/Halle";
-import {HalleService} from "../../../services/halle.service";
+import {CategoryService} from "../../../services/games/category.service";
+import {Hall} from "../../../models/games/Hall";
+import {HallService} from "../../../services/games/hall.service";
 import {Club} from "../../../models/games/Club";
-import {ClubService} from "../../../services/club.service";
-import {GameCreateDTO} from "../../../services/dto/game-create-dto";
-import {GameService} from "../../../services/game.service";
+import {ClubService} from "../../../services/games/club.service";
+import {GameCreateDTO} from "../../../services/games/dto/game-create-dto";
+import {GameService} from "../../../services/games/game.service";
 import {Router} from "@angular/router";
 import {tap} from "rxjs/operators";
 import {MatSnackBar, MatSnackBarModule} from "@angular/material/snack-bar";
@@ -41,14 +41,14 @@ export class CreateGameComponent implements OnInit {
 
   club$!: Observable<Club[]>;
   categories$!: Observable<Category[]>
-  halle$!: Observable<Halle[]>;
+  halle$!: Observable<Hall[]>;
 
 
   constructor(private formBuilder: FormBuilder,
               private gameService:GameService,
               private clubService: ClubService,
               private categoryService: CategoryService,
-              private halleService: HalleService,
+              private halleService: HallService,
               private router: Router,
               private snackBar: MatSnackBar) {
   }
@@ -66,7 +66,7 @@ export class CreateGameComponent implements OnInit {
     this.club$ = this.clubService.getClubs();
     this.halle$ = this.homeTeamControl.valueChanges.pipe(
       switchMap(clubCode => this.clubService.getClub(clubCode)),
-      switchMap(club => this.halleService.getHalles(club.code))
+      switchMap(club => this.halleService.getHall(club.code))
     )
 
     this.formGame = this.formBuilder.group({

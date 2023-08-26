@@ -1,10 +1,13 @@
 import { Routes } from '@angular/router';
+import {authentificationGuard} from "./utils/guards/authentification.guard";
 
 export const routes: Routes = [
-  { path: 'test',
-  loadComponent: () => import('./components/template/dashboard/dashboard.component').then(module => module.DashboardComponent)},
-  { path: 'games',
+ { path: 'games',
+   canActivate: [authentificationGuard],
   loadChildren: () => import('./components/games/route')},
   { path: 'users',
-    loadChildren: () => import('./components/users/route')}
+    loadChildren: () => import('./components/users/route')},
+  { path: 'booking',
+    canActivate: [authentificationGuard],
+    loadChildren: () => import('./components/booking/route')}
 ];

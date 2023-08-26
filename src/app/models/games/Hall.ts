@@ -1,6 +1,6 @@
 import {Address} from "./Address";
 
-export interface Halle {
+export interface Hall {
   id: string;
   name: string;
   address: Address;

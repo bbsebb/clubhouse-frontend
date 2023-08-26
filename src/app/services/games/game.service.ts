@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable, of} from "rxjs";
-import {Game} from "../models/games/Game";
+import {Game} from "../../models/games/Game";
 import {GameCreateDTO} from "./dto/game-create-dto";
 
 @Injectable({

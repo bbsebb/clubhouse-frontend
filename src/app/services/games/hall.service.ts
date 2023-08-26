@@ -1,24 +1,23 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
-import {Halle} from "../models/games/Halle";
+import {Hall} from "../../models/games/Hall";
 
 import {map} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
 })
-export class HalleService {
+export class HallService {
 
   constructor(private http:HttpClient) { }
 
-  getHalles( clubCode: string): Observable<Halle[]> {
-    let url:string = 'http://localhost:8080/api/halles';
+  getHall(clubCode: string): Observable<Hall[]> {
+    let url:string = 'http://localhost:8080/api/game-halls';
     if(clubCode) {
-      url = 'http://localhost:8080/api/halles?club_code='+clubCode;
+      url = 'http://localhost:8080/api/game-halls?club_code='+clubCode;
     }
-    console.log(url);
-    return this.http.get<Halle[]>(url).pipe(
+    return this.http.get<Hall[]>(url).pipe(
       map(halles => halles.map(
         halle => {
           if(halle.id === '00000000-0000-0000-0000-000000000000') {
@@ -31,8 +30,8 @@ export class HalleService {
     );
   }
 
-  private mapUnknown():Halle {
-    return <Halle>{
+  private mapUnknown():Hall {
+    return <Hall>{
       id: '00000000-0000-0000-0000-000000000000',
       name: "Inconnue",
       address: {

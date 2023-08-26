@@ -1,6 +1,6 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {GameService} from "../../../services/game.service";
+import {GameService} from "../../../services/games/game.service";
 import {Game} from "../../../models/games/Game";
 import {MatTableDataSource, MatTableModule} from "@angular/material/table";
 import {MatPaginator, MatPaginatorModule} from "@angular/material/paginator";

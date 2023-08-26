@@ -8,7 +8,7 @@ import {MatOptionModule} from "@angular/material/core";
 import {MatSelectModule} from "@angular/material/select";
 import {FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {NgxMatFileInputModule} from "@angular-material-components/file-input";
-import {GameService} from "../../../services/game.service";
+import {GameService} from "../../../services/games/game.service";
 import {MatSnackBar, MatSnackBarModule} from "@angular/material/snack-bar";
 
 @Component({

@@ -1,0 +1,4 @@
+@import "src/app/form";
+:host .mdc-text-field__input::-webkit-calendar-picker-indicator {
+  display: block;
+}

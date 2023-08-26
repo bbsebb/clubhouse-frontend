@@ -1,4 +1,4 @@
-import {Gender} from "../../models/games/Gender";
+import {Gender} from "../../../models/games/Gender";
 
 export interface GameCreateDTO {
   categoryId: string,

@@ -1,23 +1,15 @@
 import {Component, OnInit} from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {CommonModule} from '@angular/common';
 import {MatButtonModule} from "@angular/material/button";
 import {MatCardModule} from "@angular/material/card";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatOptionModule} from "@angular/material/core";
 import {MatSelectModule} from "@angular/material/select";
-import {
-  AbstractControl,
-  Form,
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators
-} from "@angular/forms";
+import {AbstractControl, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {Validation} from "../../../utils/validators/validation";
-import {UserService} from "../../../services/user.service";
-import {UserCreateDTO} from "../../../services/dto/user-create-dto";
+import {UserService} from "../../../services/users/user.service";
+import {UserCreateDTO} from "../../../services/users/dto/user-create-dto";
 import {Router} from "@angular/router";
 import {MatSnackBar, MatSnackBarModule} from "@angular/material/snack-bar";
 

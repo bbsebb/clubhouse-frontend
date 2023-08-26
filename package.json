@@ -21,6 +21,7 @@
     "@angular/platform-browser": "^16.1.0",
     "@angular/platform-browser-dynamic": "^16.1.0",
     "@angular/router": "^16.1.0",
+    "@types/big.js": "^6.2.0",
     "@types/jwt-decode": "^3.1.0",
     "bootstrap": "5.3.0",
     "jwt-decode": "^3.1.2",

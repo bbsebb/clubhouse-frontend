@@ -2,7 +2,7 @@ import {Competition} from "./Competition";
 import {Day} from "./Day";
 import {Week} from "./Week";
 import {Season} from "./Season";
-import {Halle} from "./Halle";
+import {Hall} from "./Hall";
 import {Referees} from "./Referees";
 import {Team} from "./Team";
 import {Fdme} from "./Fdme";
@@ -14,7 +14,7 @@ export interface Game {
   day: Day;
   week: Week;
   season: Season;
-  halle: Halle;
+  halle: Hall;
   referees: Referees;
   homeTeam: Team;
   visitingTeam: Team;

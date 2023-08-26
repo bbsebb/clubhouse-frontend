@@ -15,12 +15,20 @@ export class JwtInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-    try{
+    const cheminsExclus = [
+      '/api/auth/login',
+      '/api/users/create'
+    ];
+
+    // Utilisez l'objet URL pour extraire le chemin de la requête
+    const cheminRequete = new URL(req.url).pathname;
+
+    if(this.authService.isAuth && !cheminsExclus.includes(cheminRequete)) {
       const authReq = req.clone({
         headers: req.headers.set('Authorization', 'Bearer ' + this.authService.jwt)
       });
       return next.handle(authReq);
-    } catch (error) {
+    } else {
       return next.handle(req);
     }
   }

@@ -9,7 +9,7 @@ import {MatIconModule} from "@angular/material/icon";
 import {Router, RouterLink, RouterOutlet} from "@angular/router";
 import {MatListModule} from "@angular/material/list";
 import {MatButtonModule} from "@angular/material/button";
-import {AuthService} from "../../../services/auth.service";
+import {AuthService} from "../../../services/users/auth.service";
 
 @Component({
   selector: 'app-nav',
