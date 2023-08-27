@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {BehaviorSubject, Observable} from "rxjs";
 import {tap} from "rxjs/operators";
+import {environment} from "../../../environment";
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class AuthService {
   private _isAuth = new BehaviorSubject<boolean>(false);
   constructor(private http:HttpClient) {
     const jwt = localStorage.getItem("jwt");
-    if(jwt) {
+    if(jwt && this.isJwtValid(jwt)) {
       this._jwt = jwt;
       this._isAuth.next(true);
     }
@@ -27,7 +28,7 @@ export class AuthService {
       const loginRequest = {
         "login":login, "password":password
       }
-      return this.http.post<{"token":string}>('http://localhost:8080/api/auth/login',loginRequest,httpOptions)
+      return this.http.post<{"token":string}>(`${environment.apiUrl}/auth/login`,loginRequest,httpOptions)
           .pipe(
               tap(response => {
                 localStorage.setItem("jwt",response.token);
@@ -38,7 +39,7 @@ export class AuthService {
   }
   public logout():void {
     this._jwt = null;
-    localStorage.clear();
+    localStorage.removeItem('jwt');
     this._isAuth.next(false);
   }
 
@@ -68,6 +69,11 @@ export class AuthService {
       throw new Error("Utilisateur non identité");
     }
     return this.extractJwt(this.jwt).scope;
+  }
+  private isJwtValid(jwt: string): boolean {
+    const payload = this.extractJwt(jwt);
+    const currentTime = Math.floor(Date.now() / 1000);
+    return payload.exp > currentTime;
   }
 
   get isAuth():Observable<boolean> {

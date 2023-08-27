@@ -4,6 +4,7 @@ import {Observable} from "rxjs";
 import {Hall} from "../../models/booking/Hall";
 import {Booking} from "../../models/booking/Booking";
 import {BookingCreateDTO} from "./dto/booking-create-dto";
+import {environment} from "../../../environment";
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,11 @@ export class BookingService {
         'Content-Type': 'application/json',
       }),
     };
-    let url:string = 'http://localhost:8080/api/bookings/create';
+    let url:string =`${environment.apiUrl}/bookings/create`;
     return this.http.post<Booking>(url,bookingCreateDTO,httpOptions);
+  }
+
+  getBookings(): Observable<Booking[]> {
+    return this.http.get<Booking[]>(`${environment.apiUrl}/bookings`);
   }
 }

@@ -4,6 +4,7 @@ import {GameCreateDTO} from "../games/dto/game-create-dto";
 import {Observable} from "rxjs";
 import {UserCreateDTO} from "./dto/user-create-dto";
 import {User} from "../../models/users/user";
+import {environment} from "../../../environment";
 
 @Injectable({
   providedIn: 'root'
@@ -18,10 +19,10 @@ export class UserService {
         'Content-Type': 'application/json',
       }),
     };
-    return this.http.post('http://localhost:8080/api/users/create',userCreateDTO,httpOptions)
+    return this.http.post(`${environment.apiUrl}/users/create`,userCreateDTO,httpOptions)
   }
 
   getUsers():Observable<User[]> {
-    return this.http.get<User[]>('http://localhost:8080/api/users');
+    return this.http.get<User[]>(`${environment.apiUrl}/users`);
   }
 }

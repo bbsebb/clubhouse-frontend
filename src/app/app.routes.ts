@@ -7,7 +7,7 @@ export const routes: Routes = [
   loadChildren: () => import('./components/games/route')},
   { path: 'users',
     loadChildren: () => import('./components/users/route')},
-  { path: 'booking',
+  { path: 'bookings',
     canActivate: [authentificationGuard],
     loadChildren: () => import('./components/booking/route')}
 ];

@@ -4,6 +4,7 @@ import {Observable} from "rxjs";
 import {Hall} from "../../models/games/Hall";
 
 import {map} from "rxjs/operators";
+import {environment} from "../../../environment";
 
 @Injectable({
   providedIn: 'root'
@@ -13,9 +14,9 @@ export class HallService {
   constructor(private http:HttpClient) { }
 
   getHall(clubCode: string): Observable<Hall[]> {
-    let url:string = 'http://localhost:8080/api/game-halls';
+    let url:string =`${environment.apiUrl}/game-halls`;
     if(clubCode) {
-      url = 'http://localhost:8080/api/game-halls?club_code='+clubCode;
+      url =`${environment.apiUrl}/game-halls?club_code=${clubCode}`;
     }
     return this.http.get<Hall[]>(url).pipe(
       map(halles => halles.map(

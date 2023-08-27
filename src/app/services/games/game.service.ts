@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {Observable, of} from "rxjs";
 import {Game} from "../../models/games/Game";
 import {GameCreateDTO} from "./dto/game-create-dto";
+import {environment} from "../../../environment";
 
 @Injectable({
   providedIn: 'root'
@@ -12,11 +13,11 @@ export class GameService {
   constructor(private http: HttpClient) { }
 
   getGames():Observable<Game[]> {
-    return this.http.get<Game[]>('http://localhost:8080/api/games')
+    return this.http.get<Game[]>(`${environment.apiUrl}/games`)
   }
 
   getGame(code: string):Observable<Game> {
-      return this.http.get<Game>('http://localhost:8080/api/games/'+code);
+      return this.http.get<Game>(`${environment.apiUrl}/games/${code}`);
   }
 
   createGame(gameCreateDTO: GameCreateDTO):Observable<any> {
@@ -25,7 +26,7 @@ export class GameService {
         'Content-Type': 'application/json',
       }),
     };
-    return this.http.post('http://localhost:8080/api/games/create',gameCreateDTO,httpOptions)
+    return this.http.post(`${environment.apiUrl}/games/create`,gameCreateDTO,httpOptions)
   }
 
   importGame(fileList:FileList):Observable<any> {
@@ -38,6 +39,6 @@ export class GameService {
         'enctype': 'multipart/form-data'  // Spécifiez le type d'encodage pour les fichiers
       })
     };
-    return this.http.post('http://localhost:8080/api/games/import',formData,httpOptions)
+    return this.http.post(`${environment.apiUrl}/games/import`,formData,httpOptions)
   }
 }

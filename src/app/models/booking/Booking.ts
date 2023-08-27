@@ -10,7 +10,7 @@ export interface Booking {
   "hall":Hall,
   "user":HallUser,
   "timeslot":Timeslot,
-  "payement":Payment
+  "payment":Payment
   "allowOverlap":boolean,
   "state":BookingState
 

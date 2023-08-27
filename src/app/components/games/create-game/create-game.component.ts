@@ -17,8 +17,8 @@ import {ClubService} from "../../../services/games/club.service";
 import {GameCreateDTO} from "../../../services/games/dto/game-create-dto";
 import {GameService} from "../../../services/games/game.service";
 import {Router} from "@angular/router";
-import {tap} from "rxjs/operators";
 import {MatSnackBar, MatSnackBarModule} from "@angular/material/snack-bar";
+import {SnackBarMessageService} from "../../../services/snack-bar-message.service";
 
 @Component({
   selector: 'app-create-game',
@@ -49,8 +49,7 @@ export class CreateGameComponent implements OnInit {
               private clubService: ClubService,
               private categoryService: CategoryService,
               private halleService: HallService,
-              private router: Router,
-              private snackBar: MatSnackBar) {
+              private snackBarMessage:SnackBarMessageService) {
   }
 
   ngOnInit(): void {
@@ -83,12 +82,8 @@ export class CreateGameComponent implements OnInit {
     const gameCreate:GameCreateDTO = this.formGame.value;
     if(this.formGame.valid) {
       this.gameService.createGame(gameCreate).subscribe({
-          next: response => {
-            this.router.navigate(['/games', response.code])
-              .then(r => this.snackBar.open('Rencontre ajoutée','Fermer'));
-
-          },
-          error: error => this.snackBar.open('Il y a eu une erreur','Fermer')
+          next: response =>  this.snackBarMessage.notifyFormSubmission(['/games', response.code],'Rencontre ajoutée'),
+          error: () =>  this.snackBarMessage.notifyFormSubmission([],'Une erreur est survenue')
         }
       );
     }

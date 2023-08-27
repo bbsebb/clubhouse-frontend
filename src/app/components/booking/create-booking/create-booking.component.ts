@@ -15,6 +15,7 @@ import {BookingService} from "../../../services/bookings/booking.service";
 import {BookingCreateDTO} from "../../../services/bookings/dto/booking-create-dto";
 import {Timeslot} from "../../../models/booking/Timeslot";
 import {AuthService} from "../../../services/users/auth.service";
+import {SnackBarMessageService} from "../../../services/snack-bar-message.service";
 
 @Component({
   selector: 'app-create-booking',
@@ -37,7 +38,7 @@ export class CreateBookingComponent implements OnInit{
     'other': 'Autres'
   };
 
-  constructor(private authService:AuthService,private formBuilder:FormBuilder,private hallService:HallService,private bookingService:BookingService) {
+  constructor(private snackBarMessage:SnackBarMessageService,private authService:AuthService,private formBuilder:FormBuilder,private hallService:HallService,private bookingService:BookingService) {
   }
 
   ngOnInit(): void {
@@ -66,19 +67,19 @@ export class CreateBookingComponent implements OnInit{
   onSubmit() {
     if(this.formBooking.valid) {
       const bookingCreateDTO:BookingCreateDTO = {
-        "halleId":this.formBooking.get('hall')?.value,
-        "user": {
-          "id":this.authService.getUserid(),
-        },
+        "halleId": this.formBooking.get('hall')?.value,
         "timeslot": {
-          "start":this.startDateTimeControl.value,
-          "end":this.endDateTimeControl.value
+          "start": this.startDateTimeControl.value,
+          "end": this.endDateTimeControl.value
         },
-        "use":this.formBooking.get('use')?.value
+        "use": this.formBooking.get('use')?.value,
+        "user": {
+          "id": this.authService.getUserid(),
+        }
       }
-      console.log(bookingCreateDTO);
       this.bookingService.createBooking(bookingCreateDTO).subscribe({
-        next: booking => console.log(booking)
+        next: () => this.snackBarMessage.notifyFormSubmission([],'La réservation a été ajoutée'),
+        error: () => this.snackBarMessage.notifyFormSubmission([],'Une erreur est survenue')
       });
     }
 

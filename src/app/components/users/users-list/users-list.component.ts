@@ -37,7 +37,6 @@ export class UsersListComponent implements OnInit,AfterViewInit{
 
   ngAfterViewInit(): void {
     this.userService.getUsers().subscribe(users => {
-      console.log(users[0]);
       this.dataSource.data = users;
       this.dataSource.paginator = this.paginator;
     });
