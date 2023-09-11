@@ -22,7 +22,13 @@ export class UserService {
     return this.http.post(`${environment.apiUrl}/users/create`,userCreateDTO,httpOptions)
   }
 
+
+
   getUsers():Observable<User[]> {
     return this.http.get<User[]>(`${environment.apiUrl}/users`);
+  }
+
+  activateUser(id: string) {
+    return this.http.get(`${environment.apiUrl}/users/${id}/activate`);
   }
 }

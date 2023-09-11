@@ -7,7 +7,7 @@ import {MatInputModule} from "@angular/material/input";
 import {MatOptionModule} from "@angular/material/core";
 import {MatSelectModule} from "@angular/material/select";
 import {AbstractControl, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
-import {Observable} from "rxjs";
+import {Observable, switchMap} from "rxjs";
 import {Hall} from "../../../models/booking/Hall";
 import {Validation} from "../../../utils/validators/validation";
 import {HallService} from "../../../services/bookings/hall.service";
@@ -16,11 +16,15 @@ import {BookingCreateDTO} from "../../../services/bookings/dto/booking-create-dt
 import {Timeslot} from "../../../models/booking/Timeslot";
 import {AuthService} from "../../../services/users/auth.service";
 import {SnackBarMessageService} from "../../../services/snack-bar-message.service";
+import {map, tap} from "rxjs/operators";
+import {Game} from "../../../models/games/Game";
+import {GameService} from "../../../services/games/game.service";
+import {NameTeamPipe} from "../../../utils/pipes/name-team.pipe";
 
 @Component({
   selector: 'app-create-booking',
   standalone: true,
-  imports: [CommonModule, MatButtonModule, MatCardModule, MatFormFieldModule, MatInputModule, MatOptionModule, MatSelectModule, ReactiveFormsModule],
+  imports: [CommonModule, MatButtonModule, MatCardModule, MatFormFieldModule, MatInputModule, MatOptionModule, MatSelectModule, ReactiveFormsModule, NameTeamPipe],
   templateUrl: './create-booking.component.html',
   styleUrls: ['./create-booking.component.scss']
 })
@@ -31,6 +35,8 @@ export class CreateBookingComponent implements OnInit{
   endDateTimeControl!: FormControl;
   formTimeslot!:FormGroup;
 
+  filterGame$!:Observable<Game[]>;
+
   useOptions = {
     'refreshments': 'Buvette',
     'repast': 'Repas d\'équipe',
@@ -38,7 +44,7 @@ export class CreateBookingComponent implements OnInit{
     'other': 'Autres'
   };
 
-  constructor(private snackBarMessage:SnackBarMessageService,private authService:AuthService,private formBuilder:FormBuilder,private hallService:HallService,private bookingService:BookingService) {
+  constructor(private gameService:GameService,private snackBarMessage:SnackBarMessageService,private authService:AuthService,private formBuilder:FormBuilder,private hallService:HallService,private bookingService:BookingService) {
   }
 
   ngOnInit(): void {
@@ -61,6 +67,16 @@ export class CreateBookingComponent implements OnInit{
       "use": ['refreshments',Validators.required],
       "timeslot":this.formTimeslot,
     })
+
+    this.filterGame$ = this.startDateTimeControl.valueChanges.pipe(
+        map(startDateString => new Date(startDateString)),
+        switchMap(startDate => {
+          startDate.setHours(0,0,0,0);
+          let endDate = new Date(startDate);
+          endDate.setDate(startDate.getDate() + 1);
+          return this.gameService.getGames(startDate, endDate);
+        }),
+    );
   }
 
 
@@ -78,11 +94,10 @@ export class CreateBookingComponent implements OnInit{
         }
       }
       this.bookingService.createBooking(bookingCreateDTO).subscribe({
-        next: () => this.snackBarMessage.notifyFormSubmission([],'La réservation a été ajoutée'),
-        error: () => this.snackBarMessage.notifyFormSubmission([],'Une erreur est survenue')
+        next: () => this.snackBarMessage.notifyFormSubmission(['bookings'],'La réservation a été ajoutée'),
+        error: (err) => this.snackBarMessage.notifyFormSubmission([],err.error)
       });
     }
-
   }
 
   getFormControlErrorText(ctrl: AbstractControl):string {

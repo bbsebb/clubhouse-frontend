@@ -19,7 +19,15 @@
   <ng-container matColumnDef="roles">
     <th mat-header-cell *matHeaderCellDef> Roles </th>
     <td mat-cell *matCellDef="let user">
-      <span *ngFor="let role of user.roles">{{role.roleName}}</span>
+      <span *ngFor="let role of user.roles">{{role.roleName}} </span>
+    </td>
+  </ng-container>
+
+  <!-- Activated Column -->
+  <ng-container matColumnDef="activated">
+    <th mat-header-cell *matHeaderCellDef> Activation </th>
+    <td mat-cell *matCellDef="let user">
+      <button mat-raised-button color="primary" (click)="activateUser(user.id)" [disabled]="!!user.roles && user.roles.length > 0">Activer</button>
     </td>
   </ng-container>
 

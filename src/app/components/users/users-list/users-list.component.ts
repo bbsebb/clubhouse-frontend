@@ -10,6 +10,7 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatIconModule} from "@angular/material/icon";
 import {NameTeamPipe} from "../../../utils/pipes/name-team.pipe";
 import {RouterLink} from "@angular/router";
+import {AuthService} from "../../../services/users/auth.service";
 
 @Component({
   selector: 'app-users-list',
@@ -27,9 +28,10 @@ export class UsersListComponent implements OnInit,AfterViewInit{
     "username",
     "email",
     "roles",
+    "activated"
   ];
 
-  constructor(private userService:UserService) {
+  constructor(private userService:UserService,private authService:AuthService) {
   }
 
   ngOnInit(): void {
@@ -43,4 +45,14 @@ export class UsersListComponent implements OnInit,AfterViewInit{
   }
 
 
+  activateUser(id:string):void {
+    this.userService.activateUser(id).subscribe(
+      () => {
+        this.userService.getUsers().subscribe(users => {
+          this.dataSource.data = users;
+          this.dataSource.paginator = this.paginator;
+        });
+      }
+    )
+  }
 }

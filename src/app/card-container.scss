@@ -1,0 +1,16 @@
+.card-container {
+  margin: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+
+  .card-item {
+
+    padding: 20px;
+    flex: 1 1 calc(33% - 16px); // prend 33% de l'espace, moins l'écart
+
+    @media (max-width: 600px) { // ajustement pour les petits écrans
+      flex: 1 1 100%;
+    }
+  }
+}

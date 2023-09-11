@@ -1,0 +1,57 @@
+.carousel {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  overflow: hidden;
+  background-color: #f0f0f0;
+
+  .slide {
+    position: absolute;
+    top: 0;
+    left: 100%; // initially place all slides to the right
+    width: 100%;
+    height: 100%;
+    transition: left 0.5s;
+    background-size: cover;
+    background-position: center;
+
+    &.active {
+      left: 0;
+    }
+
+    .carousel-link {
+      display: block;
+      height: 100%;
+      padding: 20px;
+      color: white;
+      text-decoration: none;
+      background-color: rgba(0, 0, 0, 0.4); // semi-transparent background for better text visibility
+      backdrop-filter: blur(4px); // this can give a frosted glass effect on supporting browsers
+
+      .carousel-content {
+        position: absolute;
+        bottom: 20px;
+        left: 20px;
+
+        h2 {
+          font-size: 24px;
+          margin-bottom: 10px;
+        }
+
+        p {
+          font-size: 16px;
+        }
+      }
+    }
+  }
+
+  .controls {
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    transform: translateY(-50%);
+    z-index: 5; // to ensure buttons are above slides
+  }
+}

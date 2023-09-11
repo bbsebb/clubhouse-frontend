@@ -1,0 +1,14 @@
+<div class="carousel">
+  <div class="slide" *ngFor="let slide of slides; let i = index" [class.active]="i === activeSlide">
+    <a [routerLink]="slide.routerLink" class="carousel-link">
+      <div class="carousel-content">
+        <h2>{{slide.label}}</h2>
+        <p>{{slide.description}}</p>
+      </div>
+    </a>
+  </div>
+  <div class="controls">
+    <button mat-icon-button (click)="prevSlide()"><mat-icon>arrow_left</mat-icon></button>
+    <button mat-icon-button (click)="nextSlide()"><mat-icon>arrow_right</mat-icon></button>
+  </div>
+</div>
