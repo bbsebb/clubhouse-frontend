@@ -1,8 +1,8 @@
-import {Address} from "./Address";
+import { Address } from './Address';
 
 export interface HallUser {
-  "id": string,
-  "username":string,
-  "email":string,
-  "address":Address
+  id: string;
+  username: string;
+  email: string;
+  address: Address;
 }

@@ -1,9 +1,10 @@
-import {GameDetailComponent} from "./game-detail/game-detail.component";
-import {GamesListComponent} from "./games-list/games-list.component";
-import {EditGameComponent} from "./edit-game/edit-game.component";
+import {CreateGameComponent} from "./admin/create-game/create-game.component";
+import {ImportGameComponent} from "./admin/import-game/import-game.component";
+import {EditGameComponent} from "./admin/edit-game/edit-game.component";
+import {GameDetailComponent} from "./admin/game-detail/game-detail.component";
+import {GamesListComponent} from "./admin/games-list/games-list.component";
 import {Route} from "@angular/router";
-import {CreateGameComponent} from "./create-game/create-game.component";
-import {ImportGameComponent} from "./import-game/import-game.component";
+
 
 export default [
   {path: 'create', component: CreateGameComponent},

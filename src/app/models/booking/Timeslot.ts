@@ -1,4 +1,4 @@
-export interface Timeslot{
-  "start":Date,
-  "end":Date
+export interface Timeslot {
+  start: Date;
+  end: Date;
 }

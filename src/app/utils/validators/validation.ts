@@ -1,4 +1,4 @@
-import {AbstractControl, ValidatorFn} from "@angular/forms";
+import { AbstractControl, ValidatorFn } from '@angular/forms';
 
 export class Validation {
   static match(password: string, confirmPassword: string): ValidatorFn {
@@ -11,8 +11,8 @@ export class Validation {
       }
 
       if (control?.value !== checkControl?.value) {
-        controls.get(confirmPassword)?.setErrors({matching: true});
-        return {matching: true};
+        controls.get(confirmPassword)?.setErrors({ matching: true });
+        return { matching: true };
       } else {
         return null;
       }
@@ -27,9 +27,9 @@ export class Validation {
         return null;
       }
 
-      if (new Date(start?.value).getTime()  >= new Date(end?.value).getTime()) {
-        controls.get(endTimeslot)?.setErrors({timeslot: true});
-        return {timeslot: true};
+      if (new Date(start?.value).getTime() >= new Date(end?.value).getTime()) {
+        controls.get(endTimeslot)?.setErrors({ timeslot: true });
+        return { timeslot: true };
       } else {
         return null;
       }

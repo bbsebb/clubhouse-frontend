@@ -1,4 +1,4 @@
-import {PaymentType} from "../../../models/booking/payment-type";
+import { PaymentType } from '../../../models/booking/payment-type';
 
 export interface BookingPayDTO {
   amountPaid: number;

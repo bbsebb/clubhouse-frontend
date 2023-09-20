@@ -1,8 +1,8 @@
-import {Address} from "./Address";
+import { Address } from './Address';
 
 export interface Hall {
-  "id":string,
-  "name":string,
-  "address":Address,
-  "capacity":number
+  id: string;
+  name: string;
+  address: Address;
+  capacity: number;
 }

@@ -1,5 +1,5 @@
 export interface Category {
   name: string;
-  age:number;
-  isMaxAge:boolean;
+  age: number;
+  isMaxAge: boolean;
 }

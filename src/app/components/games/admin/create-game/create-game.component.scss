@@ -1,0 +1,6 @@
+@import '../../../../form';
+@import '../../../../card-container';
+
+:host .mdc-text-field__input::-webkit-calendar-picker-indicator {
+  display: block;
+}

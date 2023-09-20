@@ -1,4 +1,4 @@
-import {PhoneNumber} from "./PhoneNumber";
+import { PhoneNumber } from './PhoneNumber';
 
 export interface Coach {
   id: string;

@@ -1,4 +1,4 @@
-import {Referee} from "./Referee";
+import { Referee } from './Referee';
 
 export interface Referees {
   designatedReferee1: Referee;

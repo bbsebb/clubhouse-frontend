@@ -1,13 +1,16 @@
 <mat-sidenav-container class="sidenav-container">
-  <mat-sidenav #drawer class="sidenav" fixedInViewport
-      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
-      [mode]="(isHandset$ | async) ? 'over' : 'side'"
-      [opened]="(isHandset$ | async) === false">
+  <mat-sidenav
+    #drawer
+    class="sidenav"
+    fixedInViewport
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="(isHandset$ | async) === false"
+  >
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item routerLink="/games" href="#">Rencontres</a>
-      <a mat-list-item routerLink="/users" href="#">Utilisateurs</a>
-      <a mat-list-item routerLink="/bookings" href="#">Club-house</a>
+      <a mat-list-item routerLink="rent" href="#">Location club-house</a>
+      <a mat-list-item href="https://boutique.hoenheimsports.fr" target="_blank" rel="noopener">boutique</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -16,16 +19,14 @@
         type="button"
         aria-label="Toggle sidenav"
         (click)="drawer.toggle()"
-        *ngIf="isHandset$ | async">
+        *ngIf="isHandset$ | async"
+      >
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <span>Console d'administration</span>
       <span class="spacer"></span>
-      <a *ngIf="!(isAuth$ | async)" mat-button routerLink="/users/signup">
-        Inscription
-      </a>
-      <a *ngIf="!(isAuth$ | async)" mat-button routerLink="/users/signin">
-        Connexion
+      <a  mat-button routerLink="admin">
+        Admin
       </a>
       <a *ngIf="isAuth$ | async" mat-button (click)="onSignOut()">
         Déconnexion

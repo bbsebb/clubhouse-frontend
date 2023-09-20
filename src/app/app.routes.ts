@@ -1,18 +1,47 @@
 import { Routes } from '@angular/router';
 import {authentificationGuard} from "./utils/guards/authentification.guard";
+import {NavAdminComponent} from "./components/core/admin/nav-admin/nav-admin.component";
+import {NavComponent} from "./components/core/nav/nav.component";
 
 export const routes: Routes = [
- { path: 'games',
-   canActivate: [authentificationGuard],
-  loadChildren: () => import('./components/games/route')},
-  { path: 'users',
-    loadChildren: () => import('./components/users/route')},
-  { path: 'bookings',
-    canActivate: [authentificationGuard],
-    loadChildren: () => import('./components/booking/route')},
-  //Afin de ne pas surcharger, je fais cette page dans cette application, mais cela mériterait par la suite une application en particulier
-  { path: 'otherapp',
-    loadChildren: () => import('./components/otherapp-booking/route')},
-  { path: '',
-    loadChildren: () => import('./components/core/route') },
+  {
+    path: 'admin',
+    component: NavAdminComponent,
+    children: [
+      {
+        path: 'games',
+        canActivate: [authentificationGuard],
+        loadChildren: () => import('./components/games/admin/route')
+      },
+      {
+        path: 'users',
+        loadChildren: () => import('./components/users/admin/route')
+      },
+      {
+        path: 'bookings',
+        canActivate: [authentificationGuard],
+        loadChildren: () => import('./components/booking/admin/route')
+      },
+      {
+        path: '',
+        loadChildren: () => import('./components/core/admin/route')
+      },
+    ]
+  },
+  {
+    path: '',
+    component: NavComponent,
+    children: [
+      {
+        path: 'rent',
+        loadChildren: () => import('./components/booking/route')
+      },
+      {
+        path: '',
+        loadChildren: () => import('./components/core/route')
+      }
+    ]
+  },
+
+
 ];

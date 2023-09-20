@@ -1,0 +1,101 @@
+<div class="card-container">
+  <mat-card class="main-form card-item">
+    <form [formGroup]="formGame" (ngSubmit)="onSubmit()">
+      <mat-card-title>Equipe</mat-card-title>
+      <!--Category and gender-->
+      <mat-card class="form-card" appearance="outlined">
+        <mat-card-subtitle>Informations sur la rencontre</mat-card-subtitle>
+        <div class="form-row">
+          <mat-form-field appearance="fill">
+            <mat-label>Genre</mat-label>
+            <mat-select [formControl]="genderControl">
+              <mat-option [value]="gender.MALE"> Masculin </mat-option>
+              <mat-option [value]="gender.FEMALE"> Féminin </mat-option>
+              <mat-option [value]="gender.MIXED"> Mixte </mat-option>
+            </mat-select>
+            <mat-error>Ce champ est requis</mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Catégories</mat-label>
+            <mat-select [formControl]="categoryControl">
+              <mat-option
+                *ngFor="let category of categories$ | async"
+                [value]="category.name"
+              >
+                {{ category.name }}
+              </mat-option>
+            </mat-select>
+            <mat-error>Ce champ est requis</mat-error>
+          </mat-form-field>
+        </div>
+      </mat-card>
+
+      <!--Teams-->
+      <mat-card class="form-card" appearance="outlined">
+        <mat-card-subtitle>Équipe</mat-card-subtitle>
+        <div class="form-row">
+          <mat-form-field appearance="fill">
+            <mat-label>Recevant</mat-label>
+            <mat-select [formControl]="homeTeamControl">
+              <mat-option
+                *ngFor="let club of club$ | async"
+                [value]="club.code"
+              >
+                {{ club.name }}
+              </mat-option>
+            </mat-select>
+            <mat-error>Ce champ est requis</mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Visiteur</mat-label>
+            <mat-select [formControl]="visitingTeamControl">
+              <mat-option
+                *ngFor="let club of club$ | async"
+                [value]="club.code"
+              >
+                {{ club.name }}
+              </mat-option>
+            </mat-select>
+            <mat-error>Ce champ est requis</mat-error>
+          </mat-form-field>
+        </div>
+      </mat-card>
+
+      <!--Date and place-->
+      <mat-card class="form-card" appearance="outlined">
+        <mat-card-subtitle>Date et salle</mat-card-subtitle>
+        <div class="form-row">
+          <mat-form-field appearance="fill">
+            <mat-label>Date</mat-label>
+            <input
+              [formControl]="dateTimeControl"
+              matInput
+              type="datetime-local"
+              placeholder="start date"
+            />
+            <mat-error>Ce champ est requis</mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Salle</mat-label>
+            <mat-select [formControl]="halleControl">
+              <mat-option
+                *ngFor="let halle of halle$ | async"
+                [value]="halle.id"
+              >
+                {{ halle.name }} - {{ halle.address.street }} -
+                {{ halle.address.city }}
+              </mat-option>
+            </mat-select>
+            <mat-error>Ce champ est requis</mat-error>
+          </mat-form-field>
+        </div>
+      </mat-card>
+
+      <mat-card-actions>
+        <button mat-flat-button color="primary" type="submit">
+          ENREGISTRER
+        </button>
+      </mat-card-actions>
+    </form>
+  </mat-card>
+</div>
